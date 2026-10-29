@@ -1,0 +1,8 @@
+PG.seats=()=>{const{m,c,s}=cur(),r=R(c.n+m.id+S.date+s.t),pc=prices(c);return`${bar('Seat Selection',"go('detail')")}
+<p style="text-align:center"><span class="tag">● ${c.n}</span></p><h1 style="text-align:center;margin:10px 0;font-size:34px">${m.t}</h1><p class="mut" style="text-align:center">${dl(S.date)} • ${s.t} • ${m.lg} • ${m.fm} • ${s.st}</p><br>
+<div class="screen"></div><p class="scrt">ALL EYES TOWARD SCREEN</p>
+${J(ROWS.map(([row,name,t,n])=>{const half=n/2;return(name?`<div class="tier"><span>${name}</span><span>${pr(pc[t])}</span></div>`:'')+`<div class="sr2"><em>${row}</em>${J(Array.from({length:n},(_,i)=>{const id=row+(i+1),bk=r()<.3;return(i==half?'<span class="gap"></span>':'')+`<button class="seat ${bk?'bk':''} ${S.seats.includes(id)?'sel':''}" ${bk?'disabled':''} onclick="seat('${id}',this)">${bk?'×':i+1}</button>`}))}<em>${row}</em></div>`}))}
+<div class="legend"><span>◻ Available</span><span class="gold">◼ Selected</span><span>× Sold</span></div>
+<div class="fixed"><div id="sbar">${sbar()}</div></div>`};
+const sbar=()=>{const n=S.seats.length,t=S.seats.reduce((a,x)=>a+sp(x),0);return n?`<div><b>${n} Seat${n>1?'s':''}</b> • ${S.seats.join(', ')}<br><span class="sr gold big">₹${t}</span> <small>+ fees at checkout</small></div><button class="btn" onclick="go('checkout')">Proceed to Checkout →</button>`:'<p class="mut">Tap seats to select (max 8)</p>'};
+function seat(id,b){const i=S.seats.indexOf(id);if(i<0){if(S.seats.length>=8)return toast('Maximum 8 seats per booking');S.seats.push(id)}else S.seats.splice(i,1);b.classList.toggle('sel',i<0);$('#sbar').innerHTML=sbar()}

@@ -1,0 +1,28 @@
+function calc(){const n=S.seats.length,sub=S.seats.reduce((a,x)=>a+sp(x),0),fee=S.coupon?0:20*n,gst=Math.round(fee*.18),d=Math.min(sub,S.v?(S.v=='SHOW10'?Math.round(sub*.1):50):0);return{n,sub,fee,gst,d,tot:sub+fee+gst-d}}
+const sumH=()=>{const k=calc();return`<div class="ln"><span>Tickets (${k.n} × ${S.seats.join(', ')})</span><b>₹${k.sub}</b></div><div class="ln"><span>Convenience fee</span><b>${S.coupon?'<span class="gold">₹0 (Club offer)</span>':'₹'+k.fee}</b></div><div class="ln"><span>GST (18% on fee)</span><b>₹${k.gst}</b></div>${k.d?`<div class="ln"><span>Voucher ${S.v}</span><b class="gold">− ₹${k.d}</b></div>`:''}<div class="ln tot"><span>Payable Total</span><b>₹${k.tot}</b></div>`};
+const opt=(k,ic,t,sub,body)=>`<div class="pm ${S.pm==k?'open':''}" id="pm-${k}"><div class="ph" onclick="pm('${k}')"><i class="rad"></i><span>${ic}</span><div><b>${t}</b><small>${sub}</small></div></div><div class="pb">${body}</div></div>`;
+PG.checkout=()=>{if(!S.seats.length){setTimeout(()=>go('seats'),0);return''}const{m,c,s}=cur();return`${bar('Checkout',"go('seats')")}
+<div class="steps"><div class="on"><i>✓</i>Seats</div><hr class="on"><div class="on"><i>2</i>Payment</div><hr><div><i>3</i>Ticket</div></div>
+<div class="card lock"><span>Seats locked for <b id="tm">10:00</b></span><span class="gold">FAST TRACK</span></div>
+<div class="two-col"><div><div class="card mini">${poster(m)}<div><span class="tag">${m.fm}</span><h3 style="margin:8px 0">${m.t}</h3><p class="mut" style="font-size:13px;line-height:1.6">${c.n}<br>${dl(S.date)} • ${s.t}<br>Seats: <b class="gold">${S.seats.join(', ')}</b></p></div></div>
+<div class="card pad" style="margin-top:16px"><div id="sum">${sumH()}</div><div class="vc"><input id="vc" placeholder="HAVE A VOUCHER CODE?" value="${S.v}"><button class="btn sm" onclick="vch()">Apply</button></div></div></div>
+<div><h3 style="margin-bottom:14px">Choose Payment Method <small>256-bit encrypted</small></h3>
+${opt('upi','','Instant UPI','Google Pay, PhonePe, Paytm, BHIM',`<div class="apps">${J(['GPay','PhonePe','Paytm','BHIM'].map(a=>`<button onclick="document.querySelectorAll('.apps button').forEach(x=>x.classList.remove('on'));this.classList.add('on')">${a}</button>`))}</div><label style="margin-top:0">Enter UPI ID</label><div class="vc" style="margin:0"><input id="upi" placeholder="UPI ID"><button class="btn sm" onclick="vu()">Verify</button></div><div class="apps" style="margin:10px 0 0">${J(['@okaxis','@paytm','@ibl','@oksbi'].map(a=>`<button onclick="const i=$('#upi');i.value=i.value.split('@')[0]+'${a}'">${a}</button>`))}</div>`)}
+${opt('card','','Credit / Debit Card','Visa, Mastercard, RuPay, Amex','<label style="margin-top:0">Card number<input id="cn" inputmode="numeric" maxlength="19" placeholder="Card number" oninput="fmt(this,0)"></label><div class="two"><label>Expiry<input id="ce" placeholder="MM/YY" maxlength="5" oninput="fmt(this,1)"></label><label>CVV<input id="cv" type="password" maxlength="4" inputmode="numeric" placeholder="•••"></label></div>')}
+${opt('nb','','Net Banking','All major Indian banks supported',`<select id="bank">${J(['State Bank of India','HDFC Bank','ICICI Bank','Axis Bank','Punjab National Bank','Kotak Mahindra Bank'].map(b=>`<option>${b}</option>`))}</select>`)}
+${opt('wl','','Wallets & Postpaid','Amazon Pay, Simpl, Mobikwik',`<select id="wal">${J(['Amazon Pay','Simpl','Mobikwik','Wallet (₹'+S.wallet+')'].map(b=>`<option>${b}</option>`))}</select>`)}
+<div class="card pad" style="font-size:13px;color:var(--g2)">100% Refund Guarantee: cancel up to 2 hours before showtime for an instant full wallet refund.</div></div></div>
+<div class="fixed"><div><div><small>Payable</small><br><b class="sr gold big">₹<span id="pt">${calc().tot}</span></b></div><button class="btn" onclick="pay()">Pay Securely →</button></div></div>`};
+const upd=()=>{$('#sum').innerHTML=sumH();$('#pt').textContent=calc().tot};
+function vch(){const v=$('#vc').value.trim().toUpperCase();if(['SHOW10','WELCOME50'].includes(v)){S.v=v;toast('Voucher applied ');confetti()}else{S.v='';toast('Invalid voucher code')}upd()}
+function pm(k){S.pm=k;document.querySelectorAll('.pm').forEach(e=>e.classList.toggle('open',e.id=='pm-'+k))}
+function fmt(i,t){i.value=t?i.value.replace(/\D/g,'').replace(/^(\d{2})(\d)/,'$1/$2'):i.value.replace(/\D/g,'').replace(/(.{4})/g,'$1 ').trim()}
+function vu(){UPI.test($('#upi').value.trim())?toast('UPI ID verified ✓'):toast('Enter a valid UPI ID')}
+function pay(){const k=S.pm;let info;
+if(k=='upi'){const v=$('#upi').value.trim();if(!UPI.test(v))return toast('Enter a valid UPI ID');info='UPI • '+v}
+else if(k=='card'){const n=$('#cn').value.replace(/\s/g,''),e=$('#ce').value,c=$('#cv').value;if(!/^\d{16}$/.test(n))return toast('Enter a valid 16-digit card number');if(!/^(0[1-9]|1[0-2])\/\d{2}$/.test(e))return toast('Enter expiry as MM/YY');if(!/^\d{3,4}$/.test(c))return toast('Enter a valid CVV');info='Card •••• '+n.slice(-4)}
+else if(k=='nb')info='Net Banking • '+$('#bank').value;else info='Wallet • '+$('#wal').value.split(' (')[0];
+clr();const o=$('#ov');o.innerHTML='<div class="ovb"><div class="orbit s"><i></i><i></i><i></i></div><h2>Processing payment…</h2><p>Please do not press back</p></div>';o.classList.add('on');
+setTimeout(()=>{o.classList.remove('on');const{m,c,s}=cur(),k=calc(),d=D(S.date);d.setHours(0,0,0,0);
+const b={id:'CNV-'+(1000000+Math.floor(Math.random()*8999999)),mid:m.id,cn:c.n,ca:c.a,dl:dl(S.date),t:s.t,seats:[...S.seats],amt:k.tot,info,ts:d.getTime()+mins(s.t)*6e4,st:'ok',fb:[],audi:1+H(c.n)%6,tr:'#'+(100000+Math.floor(Math.random()*899999))};
+S.bk.unshift(b);S.last=b;save();confetti(innerWidth/2,200,90);go('ticket')},2200)}

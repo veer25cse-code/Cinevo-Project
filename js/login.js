@@ -1,0 +1,21 @@
+const DEF={name:'Veer Bamel',age:19,mobile:'',address:'Rewari City',email:'',pw:'',city:'Rewari City'};
+const pgLogin=()=>{const up=S.mode=='up';return`<div class="wrap page"><div class="top"><div class="logo">${LOGO}</div><select id="lang" class="pill" onchange="lang(this)"><option>English</option><option>हिन्दी</option></select></div>
+<div class="lg"><div class="lgh"><span class="tag">NOW PREMIERING</span><h1 class="rwd"><span style="--i:0">Cinema,</span><br><em><span style="--i:1">elevated.</span></em></h1><p class="mut">Premier seats, private lounges and the finest screens near you.</p><div class="stage"><div class="beam"></div><div class="orbit"><i></i><i></i><i></i><b>${LOGO}</b></div></div></div>
+<form class="card lc" onsubmit="return auth(event)">${up?'':`<button type="button" class="dfl" onclick="enter(DEF,DEF.city)"><span class="av">V</span><span><b>${DEF.name}</b><small>Age ${DEF.age} · ${DEF.city}</small></span><span class="arr">→</span></button><div class="or">OR SIGN IN WITH EMAIL</div>`}
+<div class="tabs"><button type="button" class="${up?'':'on'}" onclick="S.mode='in';render()">Sign In</button><button type="button" class="${up?'on':''}" onclick="S.mode='up';render()">Sign Up</button></div>
+<h2>${up?'Create your account':'Welcome back'}</h2><p class="mut" style="margin-top:6px;font-size:14px">${up?'Tell us a little about you to get started.':'Sign in to book premier seats and track rewards.'}</p>
+${up?`<label>Full name<input id="nm" required placeholder="Full name" value="${DEF.name}"></label><div class="two"><label>Age<input id="ag" type="number" min="12" max="99" required value="${DEF.age}"></label><label>Mobile (optional)<input id="mb" inputmode="numeric" maxlength="10" placeholder="10 digits"></label></div><label>Address<input id="ad" required placeholder="Address" value="${DEF.address}"></label>`:''}
+<label>${up?'Email':'Email or Mobile Number'}<input id="id" ${up?'type="email"':''} required placeholder="${up?'Email':'Email or mobile'}" value="${up?'':L('cvr','')}"></label>
+<label>Password<div class="pw"><input id="pw" type="password" required minlength="6" placeholder="Min 6 characters"><button type="button" onclick="eye(this)">${IC.eye}</button></div></label>
+<label>Your area<select id="ct">${J(CITIES.map(c=>`<option ${c==S.city?'selected':''}>${c}</option>`))}</select></label>
+<div class="row"><label class="chk" style="margin:0"><input type="checkbox" id="rm" checked>Remember device</label>${up?'':'<a onclick="forgot()">Forgot Password?</a>'}</div>
+<button class="btn w">${up?'Create account':'Sign In'} →</button>
+<div class="perk"><b>MEMBER PRIVILEGE · 0% Service Fee</b><br>New members receive zero booking surcharges on their opening ticket.</div></form></div></div>`};
+function lang(s){if(s.selectedIndex){toast('हिन्दी जल्द आ रही है — Hindi coming soon');s.selectedIndex=0}}
+function eye(b){const i=$('#pw');i.type=i.type=='password'?'text':'password';b.innerHTML=i.type=='password'?IC.eye:IC.eyeoff}
+function auth(e){e.preventDefault();const v=i=>($('#'+i)?.value||'').trim(),id=v('id').toLowerCase(),pw=$('#pw').value,ct=$('#ct').value,us=L('cvu',[]);
+if(S.mode=='up'){if(v('mb')&&!/^\d{10}$/.test(v('mb')))return toast('Mobile number must be 10 digits');if(us.find(u=>u.email==id))return toast('Account exists — please sign in');
+const u={name:v('nm'),age:+v('ag'),mobile:v('mb'),address:v('ad'),email:id,pw,city:ct};us.push(u);localStorage.setItem('cvu',JSON.stringify(us));enter(u,ct,1)}
+else{const u=us.find(u=>(u.email==id||(u.mobile&&u.mobile==id))&&u.pw==pw);if(!u)return toast('Invalid details — new here? Tap Sign Up');if($('#rm').checked)localStorage.setItem('cvr',id);enter(u,ct)}return false}
+function enter(u,ct,n){S.user=u;S.city=ct;save();confetti();toastNext(n?'Welcome, '+u.name.split(' ')[0]+'! ':'Welcome back, '+u.name.split(' ')[0]);go('home')}
+function forgot(){const e=(prompt('Enter your registered email')||'').trim().toLowerCase();if(!e)return;const us=L('cvu',[]),u=us.find(u=>u.email==e);if(!u)return toast('No account found for that email');const p=prompt('Enter a new password (min 6 characters)');if(!p||p.length<6)return toast('Password too short');u.pw=p;localStorage.setItem('cvu',JSON.stringify(us));toast('Password updated — sign in now')}
