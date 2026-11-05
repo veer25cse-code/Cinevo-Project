@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Cinevo BMU</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/assessment.css"></head>
+<body><header class="assessment-header"><a class="assessment-brand" href="home.html">CINEVO <span>BMU</span></a>
+<nav><a href="home.html">Home</a><a href="movies.html">Movies</a><a href="tickets.html">My Tickets</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="feedback.html">Feedback</a></nav></header>
+<main class="assessment-main"><section class="assessment-panel"><span class="assessment-kicker">We are listening</span><h1>Contact Cinevo</h1><p>Have a question, suggestion or issue with your booking? Send a message using the form below.</p>
+<form class="assessment-form" data-api-form="/api/contact">
+<label>Full name<input name="name" type="text" minlength="2" maxlength="70" placeholder="Enter your name" required></label>
+<label>Email address<input name="email" type="email" maxlength="120" placeholder="name@example.com" required></label>
+<label>Subject<input name="subject" type="text" minlength="3" maxlength="100" placeholder="What is your message about?" required></label>
+<label>Message<textarea name="message" minlength="10" maxlength="1500" placeholder="Write your message (at least 10 characters)" required></textarea></label>
+<button type="submit">Send message</button></form></section></main><footer class="assessment-footer"><p>© 2026 Cinevo BMU · Your cinema, your experience.</p><div><a href="about.html">About</a><a href="contact.html">Contact</a><a href="feedback.html">Feedback</a><a href="home.html">Back to booking</a></div></footer>
+<div id="form-status" role="status" aria-live="polite"></div><script src="js/assessment.js"></script></body></html>

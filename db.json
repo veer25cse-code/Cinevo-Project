@@ -1,0 +1,67 @@
+{
+  "movies": [
+    {
+      "id": "1",
+      "title": "Interstellar",
+      "genre": "Sci-Fi",
+      "language": "English",
+      "price": 250
+    },
+    {
+      "id": "2",
+      "title": "Inception",
+      "genre": "Thriller",
+      "language": "English",
+      "price": 220
+    },
+    {
+      "id": "3",
+      "title": "3 Idiots",
+      "genre": "Comedy",
+      "language": "Hindi",
+      "price": 180
+    }
+  ],
+  "bookings": [
+    {
+      "id": "GQ21_CzFiXQ",
+      "mid": 1,
+      "movie": "Stree 2",
+      "cn": "INOX Megaplex: Bus Stand Road",
+      "ca": "Bus Stand Road, Rewari City",
+      "dl": "Today, 29 Oct",
+      "t": "09:45 PM",
+      "seats": [
+        "D4"
+      ],
+      "amt": 234,
+      "info": "UPI",
+      "ts": 1793290500000,
+      "st": "ok",
+      "fb": [],
+      "audi": 3,
+      "tr": "#418325"
+    },
+    {
+      "id": "XZ2vqlhV5mw",
+      "mid": 1,
+      "movie": "Stree 2",
+      "cn": "INOX Megaplex: Bus Stand Road",
+      "ca": "Bus Stand Road, Rewari City",
+      "dl": "Today, 29 Oct",
+      "t": "09:45 PM",
+      "seats": [
+        "D4"
+      ],
+      "amt": 234,
+      "info": "UPI",
+      "ts": 1793290500000,
+      "st": "ok",
+      "fb": [],
+      "audi": 3,
+      "tr": "#437709"
+    }
+  ],
+  "users": [],
+  "$schema": "./node_modules/json-server/schema.json"
+}

@@ -1,0 +1,13 @@
+{
+  "name": "cinevo-bmu",
+  "version": "2.0.0",
+  "description": "Cinevo BMU cinema booking website - assessment 2 with Express and JSON persistence",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

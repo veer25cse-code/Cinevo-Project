@@ -25,4 +25,7 @@ else if(k=='nb')info='Net Banking • '+$('#bank').value;else info='Wallet • '
 clr();const o=$('#ov');o.innerHTML='<div class="ovb"><div class="orbit s"><i></i><i></i><i></i></div><h2>Processing payment…</h2><p>Please do not press back</p></div>';o.classList.add('on');
 setTimeout(()=>{o.classList.remove('on');const{m,c,s}=cur(),k=calc(),d=D(S.date);d.setHours(0,0,0,0);
 const b={id:'CNV-'+(1000000+Math.floor(Math.random()*8999999)),mid:m.id,cn:c.n,ca:c.a,dl:dl(S.date),t:s.t,seats:[...S.seats],amt:k.tot,info,ts:d.getTime()+mins(s.t)*6e4,st:'ok',fb:[],audi:1+H(c.n)%6,tr:'#'+(100000+Math.floor(Math.random()*899999))};
-S.bk.unshift(b);S.last=b;save();confetti(innerWidth/2,200,90);go('ticket')},2200)}
+const payload={customerName:S.user.name,customerEmail:S.user.email,movieTitle:m.t,cinema:c.n,showDate:d.toISOString().slice(0,10),showTime:s.t,seats:b.seats,totalAmount:k.tot,paymentMethod:info,bookingReference:b.id};
+fetch('/api/bookings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+.then(async response=>{const result=await response.json();if(!response.ok)throw new Error(result.message||'Booking could not be saved');S.bk.unshift(b);S.last=b;save();confetti(innerWidth/2,200);go('ticket')})
+.catch(error=>{toast(error.message+' Please try booking again.');});},2200)}

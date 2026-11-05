@@ -1,0 +1,14 @@
+[
+  {
+    "id": "USR-1793856943769-573a57",
+    "name": "Sahil",
+    "email": "veer.25cse@bmu.edu.in",
+    "age": 18,
+    "mobile": "0987654321",
+    "address": "Rewari City",
+    "city": "Jhajjar",
+    "createdAt": "2026-11-05T05:35:43.769Z",
+    "passwordSalt": "7e56cf25dac843fd818c11c89d171b7a",
+    "passwordHash": "54bd14c66faf55cdca177c8ce99a48ce47d5dc9f5f447e357d183d89bc727f6e92705c5b26156a8671881d33ab5694f1090ae466c26dfcf949679e5691b256c3"
+  }
+]

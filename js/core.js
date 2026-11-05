@@ -101,7 +101,7 @@ function go(p,o){Object.assign(S,o||{});save();try{sessionStorage.setItem('cvs',
 const toastNext=m=>{try{sessionStorage.setItem('cvt',m)}catch(e){}};
 {const m=sessionStorage.getItem('cvt');if(m){sessionStorage.removeItem('cvt');setTimeout(()=>toast(m),700)}}
 function render(){clr();const p=S.page,flow=['detail','seats','checkout','ticket'].includes(p);
-app.innerHTML=p=='login'?pgLogin():(flow?'':hdr())+`<main class="wrap page">${PG[p]()}</main>`+(flow?'':nav());after(p)}
+app.innerHTML=p=='login'?pgLogin():(flow?'':hdr())+`<main class="wrap page">${PG[p]()}</main>`+(flow?'':nav()+`<footer class="site-extra"><a href="about.html">About Cinevo</a><a href="contact.html">Contact</a><a href="feedback.html">Feedback</a></footer>`);after(p)}
 function after(p){reveal();if(p=='home')HT=setInterval(()=>{S.hi++;const e=$('#hero');if(e)e.innerHTML=heroH()},5500);
 if(p=='ticket')qr();if(p=='checkout'){S.t=600;TM=setInterval(()=>{S.t--;const e=$('#tm');if(e)e.textContent=Math.floor(S.t/60)+':'+String(S.t%60).padStart(2,'0');if(S.t<=0){clr();toastNext('Seat lock expired');go('home')}},1000)}
 if(p=='movies'&&S.focus){S.focus=0;setTimeout(()=>$('#q').focus(),200)}}

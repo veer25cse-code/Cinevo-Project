@@ -1,0 +1,18 @@
+
+.assessment-header{max-width:1180px;margin:0 auto;padding:22px 5%;display:flex;justify-content:space-between;align-items:center;gap:20px;border-bottom:1px solid rgba(255,255,255,.1)}
+.assessment-brand{font-weight:900;letter-spacing:2px;color:#fff;text-decoration:none;font-size:22px}.assessment-brand span{color:#ff6472}
+.assessment-header nav,.assessment-footer div{display:flex;gap:18px;flex-wrap:wrap}.assessment-header nav a,.assessment-footer a{color:#c7c7cf;text-decoration:none;font-size:13px}.assessment-header nav a:hover,.assessment-footer a:hover{color:#ff6472}
+.assessment-main{width:min(100% - 36px,900px);margin:42px auto 70px;min-height:55vh}
+.assessment-panel{background:#17171d;border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:clamp(22px,4vw,42px);box-shadow:0 18px 50px rgba(0,0,0,.2)}
+.assessment-kicker{color:#ff6472;font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase}
+.assessment-panel h1{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,48px);margin:10px 0 14px;color:#fff}
+.assessment-panel p{color:#b8b8c2;line-height:1.8}.assessment-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-top:25px}
+.assessment-feature{background:#202027;border:1px solid rgba(255,255,255,.08);padding:20px;border-radius:14px}.assessment-feature h3{color:#fff;margin:0 0 8px}.assessment-feature p{font-size:14px;margin:0}
+.assessment-form{display:grid;gap:16px;margin-top:24px}.assessment-form label{display:grid;gap:7px;color:#e8e8ed;font-size:13px;font-weight:600}
+.assessment-form input,.assessment-form textarea,.assessment-form select{width:100%;padding:13px 14px;border:1px solid #41414b;border-radius:9px;background:#101015;color:#fff;font:inherit;outline:none}
+.assessment-form input:focus,.assessment-form textarea:focus,.assessment-form select:focus{border-color:#ff6472;box-shadow:0 0 0 3px rgba(255,100,114,.13)}
+.assessment-form textarea{min-height:130px;resize:vertical}.assessment-form button{border:0;border-radius:9px;padding:14px 20px;background:#c92f43;color:#fff;font-weight:800;cursor:pointer}.assessment-form button:disabled{opacity:.6;cursor:wait}
+.assessment-footer{max-width:1180px;margin:auto;padding:24px 5%;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:#999;font-size:12px}
+@media(max-width:700px){.assessment-header{align-items:flex-start;flex-direction:column}.assessment-header nav{gap:12px}.assessment-footer{flex-direction:column}}
+
+#form-status{position:fixed;right:18px;bottom:18px;max-width:min(420px,calc(100% - 36px));padding:14px 18px;border-radius:10px;background:#25252d;color:#fff;z-index:99;box-shadow:0 8px 30px #0006}#form-status:empty{display:none}#form-status.success{border:1px solid #43b581}#form-status.error{border:1px solid #e05b69}

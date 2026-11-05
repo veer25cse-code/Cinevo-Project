@@ -1,0 +1,56 @@
+[
+  {
+    "id": "BKG-1793857975483-e66777",
+    "customerName": "Sahil",
+    "customerEmail": "veer.25cse@bmu.edu.in",
+    "movieTitle": "Jawan",
+    "cinema": "Miraj Cinemas: Railway Road",
+    "showDate": "2026-11-07",
+    "showTime": "07:30 PM",
+    "seats": [
+      "A2",
+      "A3"
+    ],
+    "totalAmount": 507,
+    "paymentMethod": "UPI • VEER@paytm",
+    "bookingReference": "CNV-1469557",
+    "status": "confirmed",
+    "submittedAt": "2026-11-05T05:52:55.483Z"
+  },
+  {
+    "id": "BKG-1793857887815-8048b4",
+    "customerName": "Sahil",
+    "customerEmail": "veer.25cse@bmu.edu.in",
+    "movieTitle": "Bhool Bhulaiyaa 3",
+    "cinema": "INOX Megaplex: Main Market",
+    "showDate": "2026-11-07",
+    "showTime": "06:15 PM",
+    "seats": [
+      "A1",
+      "C4"
+    ],
+    "totalAmount": 557,
+    "paymentMethod": "UPI • Veer@paytm",
+    "bookingReference": "CNV-3108601",
+    "status": "confirmed",
+    "submittedAt": "2026-11-05T05:51:27.815Z"
+  },
+  {
+    "id": "BKG-1793856984006-cf3f5e",
+    "customerName": "Sahil",
+    "customerEmail": "veer.25cse@bmu.edu.in",
+    "movieTitle": "Stree 2",
+    "cinema": "PVR ICON: City Centre Mall",
+    "showDate": "2026-11-06",
+    "showTime": "05:15 PM",
+    "seats": [
+      "A2",
+      "C4"
+    ],
+    "totalAmount": 637,
+    "paymentMethod": "UPI • Veer@paytm",
+    "bookingReference": "CNV-5272785",
+    "status": "confirmed",
+    "submittedAt": "2026-11-05T05:36:24.006Z"
+  }
+]

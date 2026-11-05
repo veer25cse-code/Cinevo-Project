@@ -233,3 +233,5 @@ body{overflow-x:clip}
 .tkt .top2{padding:16px}.tkt .info{padding:0 16px 16px}
 }
 @media(max-width:380px){.nav button{font-size:10px}.shows{grid-template-columns:repeat(2,minmax(0,1fr))}.hd .loc{font-size:12px}}
+
+.site-extra{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;padding:22px 12px 110px;color:var(--g2);font-size:13px}.site-extra a{color:var(--g2);text-decoration:none}.site-extra a:hover{color:var(--rd)}

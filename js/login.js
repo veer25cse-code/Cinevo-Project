@@ -13,9 +13,33 @@ ${up?`<label>Full name<input id="nm" required placeholder="Full name" value="${D
 <div class="perk"><b>MEMBER PRIVILEGE · 0% Service Fee</b><br>New members receive zero booking surcharges on their opening ticket.</div></form></div></div>`};
 function lang(s){if(s.selectedIndex){toast('हिन्दी जल्द आ रही है — Hindi coming soon');s.selectedIndex=0}}
 function eye(b){const i=$('#pw');i.type=i.type=='password'?'text':'password';b.innerHTML=i.type=='password'?IC.eye:IC.eyeoff}
-function auth(e){e.preventDefault();const v=i=>($('#'+i)?.value||'').trim(),id=v('id').toLowerCase(),pw=$('#pw').value,ct=$('#ct').value,us=L('cvu',[]);
-if(S.mode=='up'){if(v('mb')&&!/^\d{10}$/.test(v('mb')))return toast('Mobile number must be 10 digits');if(us.find(u=>u.email==id))return toast('Account exists — please sign in');
-const u={name:v('nm'),age:+v('ag'),mobile:v('mb'),address:v('ad'),email:id,pw,city:ct};us.push(u);localStorage.setItem('cvu',JSON.stringify(us));enter(u,ct,1)}
-else{const u=us.find(u=>(u.email==id||(u.mobile&&u.mobile==id))&&u.pw==pw);if(!u)return toast('Invalid details — new here? Tap Sign Up');if($('#rm').checked)localStorage.setItem('cvr',id);enter(u,ct)}return false}
+async function auth(e){
+  e.preventDefault();
+  const v=i=>(($('#'+i)?.value)||'').trim();
+  const id=v('id').toLowerCase(), pw=$('#pw').value, ct=$('#ct').value;
+  const button=e.submitter;
+  if(button){button.disabled=true;button.textContent='Please wait…';}
+  try{
+    let response, data;
+    if(S.mode=='up'){
+      const payload={name:v('nm'),age:Number(v('ag')),mobile:v('mb'),address:v('ad'),email:id,password:pw,city:ct};
+      response=await fetch('/api/users',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    }else{
+      response=await fetch('/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:id,password:pw})});
+    }
+    data=await response.json();
+    if(!response.ok) throw new Error(data.message||'Unable to continue.');
+    const u=data.user;
+    // Keep only non-sensitive account details in browser storage.
+    const localUser={name:u.name,age:u.age,mobile:u.mobile||'',address:u.address,email:u.email,city:u.city};
+    if($('#rm')?.checked)localStorage.setItem('cvr',id);
+    enter(localUser,ct,S.mode=='up'?1:0);
+  }catch(error){
+    toast(error.message||'Could not connect to Cinevo server. Start the backend and retry.');
+  }finally{
+    if(button){button.disabled=false;button.textContent=S.mode=='up'?'Create account →':'Sign In →';}
+  }
+  return false;
+}
 function enter(u,ct,n){S.user=u;S.city=ct;save();confetti();toastNext(n?'Welcome, '+u.name.split(' ')[0]+'! ':'Welcome back, '+u.name.split(' ')[0]);go('home')}
 function forgot(){const e=(prompt('Enter your registered email')||'').trim().toLowerCase();if(!e)return;const us=L('cvu',[]),u=us.find(u=>u.email==e);if(!u)return toast('No account found for that email');const p=prompt('Enter a new password (min 6 characters)');if(!p||p.length<6)return toast('Password too short');u.pw=p;localStorage.setItem('cvu',JSON.stringify(us));toast('Password updated — sign in now')}

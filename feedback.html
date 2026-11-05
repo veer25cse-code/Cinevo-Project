@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feedback | Cinevo BMU</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/assessment.css"></head>
+<body><header class="assessment-header"><a class="assessment-brand" href="home.html">CINEVO <span>BMU</span></a>
+<nav><a href="home.html">Home</a><a href="movies.html">Movies</a><a href="tickets.html">My Tickets</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="feedback.html">Feedback</a></nav></header>
+<main class="assessment-main"><section class="assessment-panel"><span class="assessment-kicker">Help us improve</span><h1>Share your feedback</h1><p>Tell us about your Cinevo experience. Your response is stored so the project team can review it.</p>
+<form class="assessment-form" data-api-form="/api/feedback">
+<label>Full name<input name="name" type="text" minlength="2" maxlength="70" placeholder="Enter your name" required></label>
+<label>Email address<input name="email" type="email" maxlength="120" placeholder="name@example.com" required></label>
+<label>Rate your experience<select name="rating" required><option value="">Choose a rating</option><option value="5">5 - Excellent</option><option value="4">4 - Very good</option><option value="3">3 - Good</option><option value="2">2 - Fair</option><option value="1">1 - Needs improvement</option></select></label>
+<label>Your feedback<textarea name="comments" minlength="5" maxlength="1200" placeholder="What did you like or what should we improve?" required></textarea></label>
+<button type="submit">Submit feedback</button></form></section></main><footer class="assessment-footer"><p>© 2026 Cinevo BMU · Your cinema, your experience.</p><div><a href="about.html">About</a><a href="contact.html">Contact</a><a href="feedback.html">Feedback</a><a href="home.html">Back to booking</a></div></footer>
+<div id="form-status" role="status" aria-live="polite"></div><script src="js/assessment.js"></script></body></html>
