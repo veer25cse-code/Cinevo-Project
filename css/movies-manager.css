@@ -1,0 +1,15 @@
+.mm-main{width:min(100% - 36px,1000px);display:grid;gap:28px}
+.mm-inline{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.mm-inline input{flex:1;min-width:200px;padding:13px 14px;border:1px solid #41414b;border-radius:9px;background:#101015;color:#fff;font:inherit}
+.mm-btn{border:0;border-radius:9px;padding:12px 18px;background:#c92f43;color:#fff;font-weight:800;cursor:pointer}
+.mm-btn:disabled{opacity:.6;cursor:wait}.mm-ghost{background:#2c2c35}.mm-danger{background:#7a1f2b}.mm-small{padding:8px 12px;font-size:12px}
+.mm-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px;margin-top:22px}
+.mm-card{background:#202027;border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.mm-card img{width:100%;aspect-ratio:2/3;object-fit:cover;background:#101015}
+.mm-card div{padding:14px;display:grid;gap:6px;flex:1;align-content:start}
+.mm-card h3{margin:0;color:#fff;font-size:15px}.mm-card p{margin:0;font-size:12px;color:#b8b8c2;line-height:1.5}
+.mm-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.mm-pill{display:inline-block;padding:3px 10px;border-radius:99px;font-size:12px;background:#2c2c35;color:#fff}
+.mm-pill.ok{background:#1f5c3f}.mm-pill.bad{background:#7a1f2b}
+.mm-empty{color:#b8b8c2;grid-column:1/-1}
+code{background:#101015;padding:2px 6px;border-radius:5px;font-size:.9em}

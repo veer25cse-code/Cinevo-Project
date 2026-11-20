@@ -72,3 +72,38 @@ Base URL: `http://localhost:5000`
 - The movie catalogue and demo cinema/showtime data in the existing interface are sample data. Movie records submitted to `/api/movies` are stored in `data/movies.json`.
 - JSON-file storage is suitable for a local academic demonstration, not a production ticketing system with multiple concurrent users.
 - Do not publish real personal data or payment card details in this college demo.
+
+---
+
+# Assessment 3 – Express, External API and MongoDB
+
+| Evaluation parameter | Where it is implemented |
+|---|---|
+| 1. Fetch and show data via an external API | `routes/external.js` (calls the iTunes Search API) and `movies-manager.html` + `js/movies-manager.js` (shows the results) |
+| 2. Node and Express setup | `server.js`, `package.json` (`npm start`) |
+| 3. Express APIs that save/fetch data to local JSON files | `server.js` → `/api/users`, `/api/bookings`, `/api/contact`, `/api/feedback`, `/api/newsletter`, `/api/movies` → files in `data/` |
+| 4. CRUD operations with MongoDB through Express APIs | `config/db.js`, `models/Movie.js`, `routes/mongoMovies.js` → `/api/mongo/movies` |
+
+## Extra setup for MongoDB
+1. Install MongoDB Community Server (or create a free MongoDB Atlas cluster).
+2. Run `npm install` (this installs `mongoose`).
+3. Optional: set `MONGODB_URI` (see `.env.example`). Default is `mongodb://127.0.0.1:27017/cinevo`.
+4. Run `npm start` and open `http://localhost:5000/movies-manager.html`.
+
+If MongoDB is not running, the server still starts and the JSON-file APIs keep working; the MongoDB routes answer with a 503 message.
+
+## New API endpoints
+| Method | Endpoint | Purpose |
+|---|---|---|
+| GET | `/api/external/movies?q=batman` | Fetch movies from the external API |
+| GET | `/api/mongo/status` | MongoDB connection status |
+| POST | `/api/mongo/movies` | **Create** a movie in MongoDB |
+| GET | `/api/mongo/movies` (`?q=title`) | **Read** all movies |
+| GET | `/api/mongo/movies/:id` | **Read** one movie |
+| PUT | `/api/mongo/movies/:id` | **Update** a movie |
+| DELETE | `/api/mongo/movies/:id` | **Delete** a movie |
+
+## Demo flow
+1. Open **Movie Manager** (`/movies-manager.html`).
+2. Search a movie (external API) → click **Save to MongoDB** or **Save to JSON**.
+3. Use the form to add, edit and delete movies in MongoDB. Check `data/movies.json` for the JSON-saved ones.

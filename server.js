@@ -177,6 +177,9 @@ app.post("/api/newsletter", (req, res) => {
   res.status(201).json({ success: true, message: "You are subscribed successfully." });
 });
 
+/* Assessment 3: MongoDB CRUD + external API routes */
+require("./routes")(app);
+
 app.use("/api", (req, res) => res.status(404).json({ success: false, message: "API endpoint not found." }));
 app.get("*", (req, res) => res.sendFile(path.join(__dirname, "index.html")));
 app.listen(PORT, () => console.log(`Cinevo is running at http://localhost:${PORT}`));
